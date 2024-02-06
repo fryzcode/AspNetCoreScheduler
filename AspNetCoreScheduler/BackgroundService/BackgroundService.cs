@@ -29,7 +29,7 @@ namespace AspNetCoreScheduler.BackgroundService
             }
             finally
             {
-                await Task.WhenAny(_executingTask, Task.Delay(Timeout.Infinite, cancellacationToken));
+                await Task.WhenAny(_executingTask, Task.Delay(Timeout.Infinite, cancellationToken));
             }
         }
 
