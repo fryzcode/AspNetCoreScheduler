@@ -2,13 +2,13 @@
 
 namespace AspNetCoreScheduler.BackgroundService
 {
-    public abstract class ScheduledProcesor : ScopedProcessor
+    public abstract class ScheduledProcessor : ScopedProcessor
     {
         private CrontabSchedule _schedule;
         private DateTime _nextRun;
 
         protected abstract string Schedule { get; }
-        public ScheduledProcesor(IServiceScopeFactory serviceScopeFactory) : base(serviceScopeFactory)
+        public ScheduledProcessor(IServiceScopeFactory serviceScopeFactory) : base(serviceScopeFactory)
         {
             _schedule = CrontabSchedule.Parse(Schedule);
             _nextRun = _schedule.GetNextOccurrence(DateTime.UtcNow);

@@ -10,15 +10,14 @@ namespace AspNetCoreScheduler.BackgroundService
         {
             _serviceScopeFactory = serviceScopeFactory;
         }
-
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task Process()
         {
-            do
+            using (var scope = _serviceScopeFactory.CreateScope()) 
             {
-                var now = DateTime.UtcNow;
-               
-            } while (!stoppingToken.IsCancellationRequested);
+                await ProcessInScope(scope.ServiceProvider);
+            };
         }
 
+        public abstract Task ProcessInScope(IServiceProvider serviceProvider);
     }
 }
